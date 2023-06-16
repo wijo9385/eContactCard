@@ -1,0 +1,18 @@
+BEGIN:VCARD
+VERSION:3.0
+FN: Abe Lincoln
+N: Lincoln;Abe;;;
+NICKNAME: Honest Abe
+EMAIL;TYPE=INTERNET;TYPE=HOME:HonestAbe@prevpress.com
+TEL;TYPE=WORK:212-555-1212
+TEL;TYPE=CELL:212-555-1213
+ADR:;;2 Lincoln Memorial Cir NW; Washington;DC;20037;US
+item1.ORG:Honest Abe PR
+item1.X-ABLabel:
+item2.TITLE:Owner
+item2.X-ABLabel:
+BDAY:--0212
+item3.URL:https\://en.wikipedia.org/wiki/Abraham_Lincoln
+item3.X-ABLabel:Wiki reference
+NOTE: 16th President
+END:VCARD
