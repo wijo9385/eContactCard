@@ -14,12 +14,12 @@
     <div class="d-flex flex-column">
         <div class="text-center position-relative" style="background-color: black; margin-bottom: 8rem;">
             <img class="mb-5 mt-5" width="90%" src="/public/img/logo.png" style="padding-bottom:5rem;">
-            <img class="mb-1 position-absolute top-100 start-50 translate-middle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+            <img class="mb-1 position-absolute top-100 start-50 translate-middle" src="/public/img/profile/<%- image %>"
                 width="200rem" style="border-radius: 50%;">
         </div>
-        <div class="flex-container p-2">
+        <div class="flex-container p-2" style="margin-bottom:5rem;">
             <div>
-                <h1 class="m-0 fw-bold"><%- name %></h1>
+                <h1 class="m-0 fw-bold"><%- first_name %> <%- last_name%></h1>
                 <p class="text-secondary m-0 fw-lighter"><%- title %></p>
             </div>
             <hr class="mt-2 mb-2">
@@ -35,11 +35,11 @@
             <hr class="mt-2 mb-2">
             <div class="mb-1">
                 <p class="text-secondary m-0 fw-lighter" style="font-size:0.75rem;">Address</p>
-                <h3 class="fw-semibold fs-5"><%- address_line1 %> <br> <%- address_line2 %></h3>
+                <h3 class="fw-semibold fs-5"><%- address_line1 %> <br> <%- city %>, <%- state %> <%- zipcode %></h3>
             </div>
             <hr class="mt-2 mb-2">
         </div>
-        <a href="/public/file/example.vcf" class="btn btn-primary fixed-bottom m-3 pb-3 pt-3 fw-lighter fs-4" style="background-color: black; border-radius: 5rem;"> <i class="bi bi-person-add"></i> Save Contact</a>
+        <a href="/public/file/<%- username %>.vcf" class="btn btn-primary m-3 pb-3 pt-3 fw-lighter fs-4 fixed-bottom" style="background-color: black; border-radius: 5rem;"> <i class="bi bi-person-add"></i> Save Contact</a>
     </div>
 </body>
 

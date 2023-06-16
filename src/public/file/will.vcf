@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN: William Johnson
+N: Johnson; William;;;
+EMAIL;TYPE=INTERNET;TYPE=WORK:wijo9385exc@colorado.edu
+TEL;TYPE=WORK:720-463-4762
+ADR:;;1309 University Ave; Boulder;CO;80302;US
+item1.ORG:University of Colorado Boulder
+item1.X-ABLabel:
+item2.TITLE:Student Assistant
+item2.X-ABLabel:
+END:VCARD

@@ -81,16 +81,58 @@ app.get('/card/:username', (req, res) => {
     db.one(query, [username])
     .then(data => {
       res.render('pages/card', {
-        name: data.name,
+        username: username,
+        image: data.image,
+        first_name: data.first_name,
+        last_name: data.last_name,
         title: data.title,
         phone: data.phone,
         email: data.email,
         address_line1: data.address_line1,
-        address_line2: data.address_line2
+        city: data.city,
+        state: data.state,
+        zipcode: data.zipcode
       });
     })
     .catch(err => {
       console.error(err);
+    });
+});
+
+app.get('/', (req, res) => {
+  const query = 'SELECT * FROM cards;';
+  db.any(query)
+  .then(data => {
+    res.render('pages/main', {
+      cards: data
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+  
+});
+
+app.post('/', (req, res) => {
+  console.log(req.files);
+  const query = 'INSERT INTO cards (username, image, first_name, last_name, title, phone, email, address_line1, city, state, zipcode) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *;';
+  const profile = req.files.profile;
+
+  db.one(query, [req.body.username, req.files.profile.name, req.body.first_name, req.body.last_name, req.body.title, req.body.phone, req.body.email, req.body.address_line1, req.body.city, req.body.state, req.body.zipcode])
+    .then((data) => {
+      console.log(data);
+      
+      profile.mv(__dirname + '/public/img/profile/' + profile.name);
+
+      const content = "BEGIN:VCARD\nVERSION:3.0\nFN: "+ data.first_name + " " + data.last_name + "\nN: " + data.last_name + "; " + data.first_name + ";;;\nEMAIL;TYPE=INTERNET;TYPE=WORK:" + data.email + "\nTEL;TYPE=WORK:" + data.phone + "\nADR:;;" + data.address_line1 + "; " + data.city + "; " + data.state + ";"+ data.zipcode +";US\nitem1.ORG:University of Colorado Boulder\nitem1.X-ABLabel:\nitem2.TITLE:" + data.title + "\nitem2.X-ABLabel:\nEND:VCARD";
+
+      fs.writeFileSync(__dirname + '/public/file/' + data.username + '.vcf', content);
+
+      res.redirect('/');
+    })
+    .catch(err => {
+      console.log(err);
+      res.redirect('/');
     });
 });
 // *****************************************************
