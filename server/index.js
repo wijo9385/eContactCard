@@ -3,6 +3,7 @@
 // *****************************************************
 
 const express = require("express"); // To build an application server or API
+const https = require('https');
 const app = express();
 const pgp = require("pg-promise")(); // To connect to the Postgres DB from the node server
 const bodyParser = require("body-parser");
@@ -19,6 +20,14 @@ const qr = require('qrcode');
 // *****************************************************
 
 //TODO
+// var https_options = {
+//   key: fs.readFileSync(process.env.PRIVATE_KEY),
+//   cert: fs.readFileSync(process.env.CERTIFICATE),
+//   ca: [
+//   fs.readFileSync(process.env.ROOT_CA),
+//   fs.readFileSync(process.env.BUNDLE_CA)
+//   ]
+// };
 
 // *****************************************************
 // <!-- Section 3 : Connect to DB -->
@@ -141,4 +150,5 @@ app.post('/', (req, res) => {
 // *****************************************************
 // starting the server and keeping the connection open to listen for more requests
 app.listen(3000);
+// https.createServer(https_options, app).listen(3000);
 console.log('Server is listening on port 3000');

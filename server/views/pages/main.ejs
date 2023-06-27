@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                         <% cards.forEach(card => { %>
-                                <tr data-bs-toggle="modal" data-bs-target="#updateModal">
+                                <tr data-bs-toggle="modal" data-bs-target="#updateModal" style="cursor:pointer;">
                                     <th scope="row"><%- card.username %></th>
                                     <td><%- card.first_name %></td>
                                     <td><%- card.last_name %></td>
