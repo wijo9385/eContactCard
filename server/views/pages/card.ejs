@@ -14,14 +14,19 @@
 
 <body>
     <div class="d-flex flex-column">
-        <div class="text-center position-relative" style="background-image: url('/public/img/bg.svg'); background-size:cover; background-repeat:no-repeat; padding-bottom:5rem;">
+        <div class="text-center position-relative">
+            <svg id="curved-border" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1125 899.19">
+                <path d="m1125,732c-248-175-448.57-59.05-563,41C387,926,178,948,0,794V0h1125v732Z" style="fill: #cfb87c;"/>
+                <path d="m1125,690c-248-175-405.57-141.05-520-41C430,802,178,906,0,752V0h1125v690Z"/>
+              </svg>
             <img class="mb-5 mt-5" width="90%" src="/public/img/logo.png" style="padding-bottom:5rem;">
             <div class="position-absolute start-50 translate-middle"
                 style="border-radius: 50%; background-image: url('/public/img/profile/<%- image %>'); background-size:cover; width:50%; top: 85%;">
                 <div style="margin-top:100%;"></div>
             </div>
+            <div style="margin-top:3rem;"></div>
         </div>
-        <div class="flex-container p-2" style="margin-bottom:5rem; margin-top:3rem;">
+        <div class="flex-container p-2" style="margin-bottom:5rem; margin-top:6rem;">
             <div>
                 <h1 class="m-0 fw-bold">
                     <%- first_name %>

@@ -12,7 +12,7 @@ const bcrypt = require("bcrypt"); //  To hash passwords
 const axios = require("axios"); // To make HTTP requests from our server. We'll learn more about it in Part B.
 const { json } = require("body-parser");
 const fileUpload = require('express-fileupload');
-const { auth } = require('express-openid-connect');
+const { auth, requiresAuth } = require('express-openid-connect');
 const fs = require("fs");
 const qr = require('qrcode');
 
@@ -121,7 +121,6 @@ app.get('/card/:username', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  console.log(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   const query = 'SELECT * FROM cards;';
   db.any(query)
   .then(data => {
