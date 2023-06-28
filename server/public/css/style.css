@@ -1,9 +1,7 @@
-.form-box {
-    margin: auto;
-    max-width: 500px;
-    padding: 20px;
-}
-
-.progress {
-    margin-bottom: 30px;
+#curved-border {
+    top: 0;
+    left:0;
+    position: absolute;
+    width: 100vw;
+    z-index: -99;
 }

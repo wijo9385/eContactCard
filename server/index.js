@@ -12,6 +12,7 @@ const bcrypt = require("bcrypt"); //  To hash passwords
 const axios = require("axios"); // To make HTTP requests from our server. We'll learn more about it in Part B.
 const { json } = require("body-parser");
 const fileUpload = require('express-fileupload');
+const { auth } = require('express-openid-connect');
 const fs = require("fs");
 const qr = require('qrcode');
 
@@ -30,8 +31,17 @@ const qr = require('qrcode');
 //};
 
 // *****************************************************
-// <!-- Section 3 : Connect to DB -->
+// <!-- Section 3 : Configuration -->
 // *****************************************************
+
+const oauthConfig = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SESSION_SECRET,
+  baseURL: process.env.BASE_URL,
+  clientID: 'UJQURSSMY2CHBsp01Gorw5f01WASZNIf',
+  issuerBaseURL: 'https://dev-bjbpa30gxml1zhod.us.auth0.com'
+}
 
 // database configuration
 const dbConfig = {
@@ -62,6 +72,7 @@ app.set('view engine', 'ejs'); // set the view engine to EJS
 app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
 
 app.use(fileUpload());
+app.use(auth(oauthConfig));
 
 // initialize session variables
 app.use(
@@ -110,6 +121,7 @@ app.get('/card/:username', (req, res) => {
 });
 
 app.get('/', (req, res) => {
+  console.log(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   const query = 'SELECT * FROM cards;';
   db.any(query)
   .then(data => {
