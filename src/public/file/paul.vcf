@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN: Paul Johnson
+N: Johnson; Paul;;;
+EMAIL;TYPE=INTERNET;TYPE=WORK:paulthemonk@gmail.com
+TEL;TYPE=WORK:720-884-6549
+ADR:;;567 E Phillips Dr N; Littleton; CO;80122;US
+item1.ORG:University of Colorado Boulder
+item1.X-ABLabel:
+item2.TITLE:Engineer
+item2.X-ABLabel:
+END:VCARD

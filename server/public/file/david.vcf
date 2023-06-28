@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+FN: David Carpenter
+N: Carpenter; David;;;
+EMAIL;TYPE=INTERNET;TYPE=WORK:david.a.carpenter@colorado.edu
+TEL;TYPE=WORK:303-777-7777
+ADR:;;1305 University Av; Boulder; CO;80302;US
+item1.ORG:University of Colorado Boulder
+item1.X-ABLabel:
+item2.TITLE:Grand Pooba
+item2.X-ABLabel:
+END:VCARD
