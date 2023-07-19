@@ -5,3 +5,7 @@
     width: 100vw;
     z-index: -99;
 }
+
+.fs-6 {
+    font-size:0.5em;
+}

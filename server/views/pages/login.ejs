@@ -1,9 +1,10 @@
 <%- include ('../partials/head') %>
-<div class="d-flex align-items-center" style="height: 100vh;">
+<div class="d-flex flex-column justify-content-center" style="height: 100vh; background-image: linear-gradient(to bottom right, rgb(221, 90, 221), lightblue)">
     <div class="container">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-4 col-md-6 col-sm-8" style="height: 50vh;">
-                <div class="card shadow-lg">
+        <div class="row justify-content-around align-items-center">
+            <div class="col-lg-4 col-md-5-col-sm-8"></div>
+            <div class="col-lg-4 col-md-6 col-sm-8">
+                <div class="card shadow-lg float-end" style="width:22rem;">
                     <% if (locals.message) { %>
                         <div class="alert alert-<%- locals.error ? 'danger' : 'success' %> text-center alert-dismissible fade show"
                             role="alert">
@@ -13,12 +14,14 @@
                         </div>
                     <% } %>
                     <div class="card-body">
-                        <h5 class="card-title text-center mb-4">Login</h5>
+                        <div class="text-center mb-5"><span class="fs-1 fw-bold align-middle">WCJ</span><span class="fs-1 fw-ligher align-middle"> |QR </span></div>
+                        <h3>Sign In</h3>
+                        <p>or <a class="link-secondary" href="/register">Create an Account</a></p>
                         <form action="/login" method="POST">
                             <div class="form-floating mb-3">
-                                <input type="username" class="form-control" id="username"
-                                    placeholder="Username" name="username">
-                                <label for="username">Username</label>
+                                <input type="email" class="form-control" id="email"
+                                    placeholder="Email" name="email">
+                                <label for="email">Email</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="password" class="form-control" id="password"
@@ -26,7 +29,7 @@
                                 <label for="password">Password</label>
                             </div>
                             <div class="form-check mb-3">
-                                Don't have an account? <a href="/register">Register</a>
+                                <a class="link-secondary" href="/register">Forgot Password?</a>
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Sign in</button>

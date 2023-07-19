@@ -21,18 +21,18 @@ services:
       - '3000:3000'
     volumes:
       - ./server:/home/node/app
-    command: 'npm start'
-  nginx:
-    restart: always
-    image: nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/error.log:/etc/nginx/error_log.log
-      - /etc/letsencrypt/:/etc/letsencrypt/
-    command: "nginx -g 'daemon off;'"
+    command: 'npm run dev'
+  # nginx:
+  #   restart: always
+  #   image: nginx
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+  #     - ./nginx/error.log:/etc/nginx/error_log.log
+  #     - /etc/letsencrypt/:/etc/letsencrypt/
+  #   command: "nginx -g 'daemon off;'"
 # This defines our volume(s), which will persist throughout startups.
 # If you want to get rid of a hanging volume, e.g. to test your database init,
 # run `docker-compose rm -v`. Note that this will remove ALL of your data, so

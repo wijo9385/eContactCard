@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-sm border-bottom <%- locals.fixed_navbar ? 'fixed-top' : '' %>">
+
+<nav class="navbar navbar-expand-sm border-bottom bg-light fixed-top">
   <div class="container">
     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse"
       aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,17 +7,18 @@
     </button>
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="navbar-nav me-auto">
+        <span class="fs-3 fw-bold align-middle">WCJ</span><span class="fs-3 fw-ligher align-middle"> |QR </span>
       </ul>
       <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Settings
-        </button>
+        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
+      data-bs-toggle="dropdown" aria-expanded="false">
+      <strong><%- user_email %></strong>
+    </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/logout">Settings</a>
           <a class="dropdown-item" href="/logout">Logout</a>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </nav>
