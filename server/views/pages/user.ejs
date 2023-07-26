@@ -2,6 +2,13 @@
 <%- include ('../partials/menu') %>
 <div class="flex-container row justify-content-center mb-5" style="margin-top:10rem;">
     <div class="col-lg-10 col-sm-12">
+        <div class="d-flex justify-content-end align-content-end mt-3 p-2">
+            <a class="btn btn-primary px-3 mx-1" href="/qrcode">
+                <svg fill="#fff" class="bi me-2" width="16" height="16">
+                    <use xlink:href="#qr-code"></use>
+                  </svg>QR Codes
+            </a>
+        </div>
         <div class="shadow rounded flex-container p-3">
             <form class="form" action="/profiles/<%- profile_id %>" method="POST" enctype="multipart/form-data">
                 <div class="text-center mb-3 align-items-center">

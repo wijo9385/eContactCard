@@ -1,89 +1,85 @@
 <%- include ('../partials/head') %>
-<%- include ('../partials/menu') %>
-<%- include ('../partials/sidebar') %>
-<div class="flex-container row justify-content-center" style="margin-left:20rem; margin-top:3rem;">
-    <div class="col-lg-10 col-sm-12">
-        <div class="d-flex justify-content-end align-content-end mt-3 p-2">
-            <button type="button" class="btn btn-outline-danger px-3 mx-1">
-                Delete
-            </button>
-            <button type="button" class="btn btn-primary px-3 mx-1" data-bs-toggle="modal" data-bs-target="#invite">
-                <i class="bi bi-plus-circle"></i> Invite
-            </button>
-        </div>
-        <div class="shadow rounded flex-container p-3" style="min-height:20rem;">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">Profile</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% profiles.forEach(profile => { %>
-                        <tr class="align-middle" onclick="window.location='/profiles/<%- profile.profile_id %>'" style="cursor:pointer;">
-                            <td scope="row">
-                                <div class="d-flex">
-                                    <div class="position-relative"
-                                        style="border-radius: 50%; background-image: url('/public/img/profile/<%- profile.image %>'); background-size:cover; width:64px; height:64px;">
+    <%- include ('../partials/menu') %>
+        <%- include ('../partials/sidebar', {profiles: true, qr_codes: false}) %>
+            <div class="flex-container row justify-content-center" style="margin-left:20rem; margin-top:3rem;">
+                <div class="col-lg-10 col-sm-12">
+                    <div class="d-flex justify-content-end align-content-end mt-3 p-2">
+                        <button type="button" class="btn btn-primary px-3 mx-1" data-bs-toggle="modal"
+                            data-bs-target="#invite">
+                            <i class="bi bi-plus-circle"></i> Add User
+                        </button>
+                    </div>
+                    <div class="shadow rounded flex-container p-3" style="min-height:20rem;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Profile</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% profiles.forEach(profile=> { %>
+                                    <tr class="align-middle"
+                                        onclick="window.location='/profiles/<%- profile.profile_id %>'"
+                                        style="cursor:pointer;">
+                                        <td scope="row">
+                                            <div class="d-flex">
+                                                <div class="position-relative"
+                                                    style="border-radius: 50%; background-image: url('/public/img/profile/<%- profile.image %>'); background-size:cover; width:64px; height:64px;">
+                                                </div>
+                                                <div class="d-flex flex-column mx-2 justify-content-center">
+                                                    <span class="fs-5">
+                                                        <%- profile.first_name %>
+                                                            <%- profile.last_name %>
+                                                    </span>
+                                                    <span class="fs-6 text-secondary fw-light">
+                                                        <%- profile.emails[0].email %>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="<%- profile.active ? 'text-success' : '' %>"><% if(profile.active) {%><i class="bi bi-check-circle"></i> <%} else { %> <i class="bi bi-dash-circle"></i> <%} %>
+                                                <%- profile.active ? 'Active' : 'Pending' %></span>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="invite" tabindex="-1" aria-labelledby="inviteLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/invite" method="POST">
+                            <div class="modal-body" style="min-height:30vh;">
+                                <div class="row p-0">
+                                    <div class="form-floating mb-3 col">
+                                        <input type="text" class="form-control" id="first_name" name="first_name">
+                                        <label for="first_name">First Name</label>
                                     </div>
-                                    <div class="d-flex flex-column mx-2 justify-content-center">
-                                        <span class="fs-5">
-                                            <%- profile.first_name %>
-                                                <%- profile.last_name %>
-                                        </span>
-                                        <span class="fs-6 text-secondary fw-light">
-                                            <%- profile.emails[0].email %>
-                                        </span>
+                                    <div class="form-floating mb-3 col">
+                                        <input type="text" class="form-control" id="last_name" name="last_name">
+                                        <label for="last_name">Last Name</label>
                                     </div>
                                 </div>
-                            </td>
-                            <td>
-                                <span class="text-success"><i class="bi bi-check-circle"></i>
-                                    Active</span>
-                            </td>
-                        </tr>
-                        <% }); %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-<!-- Modal -->
-<div class="modal fade" id="invite" tabindex="-1" aria-labelledby="inviteLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Invite Collaborators</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="clear_emails()"></button>
-        </div>
-        <div class="modal-body" style="min-height:30vh;">
-          <p class="text-secondary fw-light">Enter emails to invite others to create their own profile.</p>
-          <div class="input-group mb-3">
-            <input type="text" id="email-value" class="form-control" placeholder="john@example.com" aria-describedby="invite_email">
-            <button class="btn btn-primary" type="button" id="invite_email" onclick="add_invite_email()">Add</button>
-          </div>
-          <div class="d-flex flex-wrap" id="email-body">
-
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clear_emails()">Close</button>
-          <button type="button" class="btn btn-primary" onclick="send_emails()">Send</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>
-    var input = document.getElementById('email-value');
-    input.addEventListener("keypress", function(event) {
-        // If the user presses the "Enter" key on the keyboard
-        if (event.key === "Enter") {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        document.getElementById("invite_email").click();
-        }
-    });
-  </script>
-<%- include ('../partials/footer') %>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="email" name="email">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <%- include ('../partials/footer') %>

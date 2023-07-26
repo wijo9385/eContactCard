@@ -1,0 +1,73 @@
+<%- include ('../partials/head') %>
+    <%- include ('../partials/menu') %>
+        <%- include ('../partials/sidebar', {profiles: true, qr_codes: false}) %>
+            <div class="flex-container row justify-content-center" style="margin-left:20rem; margin-top:3rem;">
+                <nav class="navbar">
+                    <div class="container-fluid">
+                        <div class="justify-content-around" id="navbar-collapse">
+                            <ul class="navbar-nav">
+                                <li class="nav-item mx-3"><a class="nav-link fs-1" href="/profiles/<%- profile_id %>"><i
+                                            class="bi bi-arrow-left"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <div class="col-lg-10 col-sm-12">
+                    <div class="d-flex justify-content-end align-content-end mt-3 p-2">
+                        <button type="button" class="btn btn-primary px-3 mx-1" data-bs-toggle="modal"
+                            data-bs-target="#create_qr">
+                            <i class="bi bi-plus-circle"></i> Create
+                        </button>
+                    </div>
+                    <div class="shadow rounded flex-container p-3" style="min-height:20rem;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Scans</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% qrcodes.forEach(qrcode => { %>
+                                    <tr class="align-middle">
+                                        <td scope="row">
+                                            <%- qrcode.id %>
+                                        </td>
+                                        <td>
+                                            <%- qrcode.name %>
+                                        </td>
+                                        <td>
+                                            <%- qrcode.scans %>
+                                        </td>
+                                        <td>
+                                            <a href="/public/qrcodes/<%- profile_id %>_<%- qrcode.id %>.png" download>Download</a>
+                                        </td>
+                                    </tr>
+                                <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="create_qr" tabindex="-1" aria-labelledby="inviteLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Name the QR Code</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/qrcodes/<%- profile_id %>" method="POST">
+                            <div class="modal-body" style="min-height:30vh;">
+                                <input type="text" id="email-value" class="form-control" placeholder="ex. Will's Business Card" name="name">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <%- include ('../partials/footer') %>

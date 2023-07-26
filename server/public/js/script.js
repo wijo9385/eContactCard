@@ -93,6 +93,36 @@ function send_emails(){
     });
 }
 
+function permissions(pid){
+    fetch('/permissions/' + pid, {
+        method: 'GET'
+    }).then((data) => {
+        if(data.permissions == 'admn'){
+            document.getElementById('permission_option').setAttribute('value', 'Admin');
+            document.getElementById('permission_option').innerHTML = 'Admin';
+        }else if(data.permissions == 'user'){
+            document.getElementById('permission_option').setAttribute('value','User');
+            document.getElementById('permission_option').innerHTML = 'User';
+        }else {
+            document.getElementById('permission_option').setAttribute('value', 'Owner');
+            document.getElementById('permission_option').innerHTML = 'Owner';
+        }
+    })
+    .catch(err => {
+        console.log(err);
+    });
+}
+
+async function delProfile(pid){
+    fetch('/delete', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+          },
+        body: JSON.stringify({profile_id: pid})
+    });
+}
+
 document.getElementById('fileUpload').onchange = event => {
     const [file] = document.getElementById('fileUpload').files;
     if(file){

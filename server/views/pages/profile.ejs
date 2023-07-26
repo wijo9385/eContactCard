@@ -1,6 +1,6 @@
 <%- include ('../partials/head') %>
 <%- include ('../partials/menu') %>
-<%- include ('../partials/sidebar') %>
+<%- include ('../partials/sidebar', {profiles: true, qr_codes: false}) %>
 <div class="flex-container row justify-content-center mb-5" style="margin-left:20rem; margin-top:3rem;">
     <nav class="navbar">
         <div class="container-fluid">
@@ -13,6 +13,22 @@
         </div>
     </nav>
     <div class="col-lg-10 col-sm-12">
+        <div class="d-flex justify-content-end align-content-end mt-3 p-2">
+            <button type="button" onclick="delProfile('<%- profile_id %>')" class="btn btn-outline-danger px-3 mx-1">
+                Delete
+            </button>
+            <% if(active){ %>
+            <button type="button" onclick="permissions('<%- profile_id %>')" class="btn btn-primary px-3 mx-1" data-bs-toggle="modal"
+                data-bs-target="#permissions">
+                Change Permissions
+            </button>
+            <% } %>
+            <a class="btn btn-primary px-3 mx-1" href="/qrcodes/<%- profile_id %>">
+                <svg fill="#fff" class="bi me-2" width="16" height="16">
+                    <use xlink:href="#qr-code"></use>
+                  </svg>QR Codes
+            </a>
+        </div>
         <div class="shadow rounded flex-container p-3">
             <form class="form" action="/profiles/<%- profile_id %>" method="POST" enctype="multipart/form-data">
                 <div class="text-center mb-3 align-items-center">
@@ -347,6 +363,35 @@
                 <button type="submit" class="btn btn-primary">Save Changes</button>
             </div>
         </form>
+    </div>
+</div>
+<div class="modal fade" id="permissions" tabindex="-1" aria-labelledby="inviteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Change Permissions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/permissions/<%- profile_id %>" method="POST">
+                <div class="modal-body" style="min-height:30vh;">
+                    <div class="form-floating">
+                        <select class="form-select" name="permissions"
+                            aria-label="Floating label select example">
+                            <option id="permission_option" value="" selected>
+                                
+                            </option>
+                            <option value="admn">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                        <label for="permissions">Permissions</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 <%- include ('../partials/footer') %>
